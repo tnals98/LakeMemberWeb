@@ -1,4 +1,4 @@
-package member.controller;
+package notice.controller;
 
 import java.io.IOException;
 
@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberService;
-import member.model.vo.Member;
-
+import notice.model.service.NoticeService;
+import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class MyInfoCountroller
+ * Servlet implementation class DetailCountroller
  */
-@WebServlet("/member/myInfo.do")
-public class MyInfoCountroller extends HttpServlet {
+@WebServlet("/notice/detail.do")
+public class DetailCountroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyInfoCountroller() {
+    public DetailCountroller() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +31,20 @@ public class MyInfoCountroller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// 페이지 이동 2가지
-		// 1. with Data <- DataBase에서 가져옴
-		// 쿼리문 : SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = ?
-		MemberService service = new MemberService();
-		String memberId = request.getParameter("member-id");
-		Member member = service.selectOneById(memberId);
-		request.setAttribute("member", member);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/myInfo.jsp");
-		view.forward(request, response);
-		// 2. without Data(단순 페이지 이름)
-//		response.sendRedirect("");
+		// SELECT * FROM NOTICE_TBL WHERE NOTICE_NO = ?
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		NoticeService service = new NoticeService();
+		Notice notice = service.selectOneByNo(noticeNo);
+		if(notice != null) {
+			// 상세 페이지로 이동
+			request.setAttribute("notice", notice);
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/detail.jsp");
+			view.forward(request, response);
+		}else {
+			// 실패 페이지로 이동
+			request.setAttribute("msg","데이터가 존재하지 않습니다.");
+			request.getRequestDispatcher("/WEB-INF/views/member/servixeFail.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
+
 /**
  * Servlet implementation class LoginController
  */
@@ -59,13 +60,13 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("msg", "로그인 성공!");
 			request.setAttribute("url", "/index.jsp");
 			RequestDispatcher view
-			= request.getRequestDispatcher("/member/serviceSuccess.jsp");
+			= request.getRequestDispatcher("/WEB-INF/views/common/serviceSuccess.jsp");
 			view.forward(request, response);  // 누락주의
 		}else {
 			// 로그인 실패
 			request.setAttribute("msg", "로그인이 되지 않았습니다.");
 			RequestDispatcher view
-			= request.getRequestDispatcher("/member/serviceFail.jsp");
+			= request.getRequestDispatcher("/WEB-INF/views/common/serviceFail.jsp");
 			view.forward(request, response);  // 누락주의
 		}
 	}

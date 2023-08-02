@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
+
 /**
  * Servlet implementation class EnrollController
  */
@@ -30,6 +31,7 @@ public class EnrollController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/WEB-INF/views/member/enroll.jsp").forward(request, response);
 	}
 
 	/**
@@ -58,11 +60,11 @@ public class EnrollController extends HttpServlet {
 			// 성공하면 성공페이지로 이동 -> RequestDispatcher
 			request.setAttribute("msg", "회원가입 성공했어요.");
 			request.setAttribute("url", "/index.jsp");
-			request.getRequestDispatcher("/member/serviceSuccess.jsp")
+			request.getRequestDispatcher("/common/serviceSuccess.jsp")
 			.forward(request, response);
 		}else {
 			// 실패
-			request.getRequestDispatcher("/member/serviceFail.jsp")
+			request.getRequestDispatcher("/common/serviceFail.jsp")
 			.forward(request, response);
 		}
 	}

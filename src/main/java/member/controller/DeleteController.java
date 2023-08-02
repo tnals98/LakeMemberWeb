@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
 
+
+
 /**
  * Servlet implementation class DeleteController
  */
@@ -41,14 +43,14 @@ public class DeleteController extends HttpServlet {
 			// 1. with Data
 			request.setAttribute("msg", "회원 탈퇴 성공!");
 			request.setAttribute("url", "/member/logout.do");
-			RequestDispatcher view = request.getRequestDispatcher("/member/serviceSuccess.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/common/serviceSuccess.jsp");
 			view.forward(request, response);  // 누락주의!
 			// 2. without Data
 //			response.sendRedirect("/member/serviceSuccess.jsp");
 		}else {
 			// 실패
 			request.setAttribute("msg", "회원 탈퇴를 완료하지 못했습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("/member/serviceFail.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/common/serviceFail.jsp");
 			view.forward(request, response);  // 누락주의!
 		}
 		

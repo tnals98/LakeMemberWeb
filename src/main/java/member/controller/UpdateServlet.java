@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
+
 /**
  * Servlet implementation class UpdateServlet
  */
@@ -58,7 +59,7 @@ public class UpdateServlet extends HttpServlet {
 		}else {
 			// 실패하면 에러페이지
 			request.setAttribute("msg", "회원 수정이 완료되지 않았습니다.");
-			request.getRequestDispatcher("/member/serviceFail.jsp").forward(request, response);
+			request.getRequestDispatcher("/common/serviceFail.jsp").forward(request, response);
 		}
 	}
 
